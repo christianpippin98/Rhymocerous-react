@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PoemList from "./PoemList"
 import NavBar from "../nav/NavBar"
 import Poem from "./PoemCard"
+import APIManager from "../../modules/APIManager"
 
 // import { isAuthenticated } from "../helpers/simpleAuth"
 
@@ -19,16 +20,10 @@ class PoemManager extends Component {
     // get all poems
     // set state with new data for poems
     // if (isAuthenticated()) {
-      fetch("http://localhost:8000/poems", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${sessionStorage.getItem("rhymocerous_token")}`
-        }
-      })
-      .then(response => response.json())
+      APIManager.getAll()
       .then(response => {
         // console.log("prop", this.props.poems)
-        // console.log("res",response)
+        console.log("res",response)
         this.setState({ poems: response })
       })
     // }
