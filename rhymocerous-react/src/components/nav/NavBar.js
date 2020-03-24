@@ -26,10 +26,7 @@ class NavBar extends Component {
               className="nav-item"
               onClick={() => { this.props.history.push("/poems/new") }}>
               Write A Poem
-                        </button>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Profile</Link>
+            </button>
           </li>
         </ul>
       </nav>

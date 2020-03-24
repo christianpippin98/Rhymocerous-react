@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Route } from "react-router-dom"
 import NavBar from "./nav/NavBar"
 import ApplicationViews from "./ApplicationViews"
+import RhymeSearch from "./rhyme/RhymeSearch"
 
 class RhymocerousBuilder extends Component {
 
@@ -15,10 +16,14 @@ class RhymocerousBuilder extends Component {
         return (
             <React.Fragment>
                 <Route render={props => (
-                    <NavBar {...props} searchResults={this.searchResults} />
+                    <NavBar {...props} />
                 )} />
 
-                <ApplicationViews completedSearch={this.state.completedSearch} filteredPoems={this.state.poems} />
+
+                <RhymeSearch />
+
+
+                <ApplicationViews />
             </React.Fragment>
         )
     }
