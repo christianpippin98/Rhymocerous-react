@@ -15,7 +15,7 @@ class PoemDetail extends Component {
                             <Card.Title>{this.props.poem.title}</Card.Title>
                             <Card.Text>{this.props.poem.body}</Card.Text>
                             <Card.Text>{this.props.poem.createdAt}</Card.Text>
-                            <Button variant="primary">Edit</Button>
+                            <Button variant="primary" onClick={() => { this.props.history.push(`/poems/edit/${this.props.poem.id}`) }}>Edit</Button>
                     </Card>
                 </section>
             </>

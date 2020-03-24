@@ -6,6 +6,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import PoemDetailView from "./poem/PoemDetailView"
 import NewPoemForm from "./poem/NewPoemForm"
+import EditPoemForm from "./poem/EditPoemForm"
 
 class ApplicationViews extends Component {
   
@@ -26,6 +27,9 @@ class ApplicationViews extends Component {
         />
         <Route path="/poems/new" render={(props) => {
           return <NewPoemForm {...props} />
+        }} />
+        <Route path="/poems/edit/:poemId(\d+)" render={(props) => {
+          return <EditPoemForm {...props} />
         }} />
         <Route
           path="/register" render={props => {

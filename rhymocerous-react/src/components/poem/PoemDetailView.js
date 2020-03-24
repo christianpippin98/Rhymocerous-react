@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PoemDetail from "./PoemDetail"
-import { isAuthenticated } from "../helpers/simpleAuth"
+import APIManager from "../../modules/APIManager"
 
 class PoemDetailView extends Component {
 
@@ -15,20 +15,10 @@ class PoemDetailView extends Component {
     getPoem = () => {
         // get all poems
         // set state with new data for poems
-        if (isAuthenticated()) {
-          fetch(`http://localhost:8000/poems/${this.props.match.params.poemId}`, {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Token ${sessionStorage.getItem("rhymocerous_token")}`
-            }
-          })
-          .then(response => response.json())
+          APIManager.get(`${this.props.match.params.poemId}`)
           .then(response => {
-            // console.log("prop", this.props.poems)
-            // console.log("res",response)
             this.setState({ poem: response })
           })
-        }
       }
 
   render() {

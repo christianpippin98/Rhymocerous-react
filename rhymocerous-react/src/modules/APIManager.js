@@ -20,7 +20,7 @@ export default {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${sessionStorage.getItem("rhymocerous_token")}`
             }
-        })
+        }).then(response => response.json())
     },
     delete(id) {
         return fetch(`${remoteURL}/poems/${id}`, {
@@ -40,5 +40,15 @@ export default {
             },
             "body": JSON.stringify(newObject)
         }).then(response => response.json())
-    }
+    },
+    update(editedItem, id) {
+        return fetch(`${remoteURL}/poems/${id}`, {
+          "method": "PUT",
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${sessionStorage.getItem("rhymocerous_token")}`
+          },
+          "body": JSON.stringify(editedItem)
+        });
+      }
 }

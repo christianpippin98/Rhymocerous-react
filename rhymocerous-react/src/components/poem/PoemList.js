@@ -15,12 +15,12 @@ class PoemList extends Component {
       .then(() => {
         APIManager.getAll("poems")
           .then((newPoems) => {
-            console.log("newpoems", newPoems)
             this.setState({
               poems: newPoems
             })
           })
       })
+      .then(() => APIManager.getAll("poems"));
   }
 
   render() {
