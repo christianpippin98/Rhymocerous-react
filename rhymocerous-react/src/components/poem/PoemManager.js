@@ -31,7 +31,7 @@ class PoemManager extends Component {
             
       <>
         <main className="explorer">
-          <PoemList poems={this.state.poems} completedSearch={this.props.completedSearch} filteredPoems={this.props.filteredPoems} {...this.props}/>   
+          <PoemList poems={this.state.poems} {...this.props}/>   
         </main>
       </>
     )
