@@ -10,33 +10,6 @@ class NavBar extends Component {
       poems : ""
   }
 
-
-
-
-  componentDidMount() {
-    this.getPoems()
-  }
-
-  getPoems = () => {
-    // query parameter that fetches all poems with filter for name
-    // if (isAuthenticated()) {
-      fetch(`http://localhost:8000/poems`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${sessionStorage.getItem("Rhymocerous_token")}`
-        }
-      })
-      .then(response => response.json())
-      .then(response => {
-        // console.log("prop", this.props.poems)
-        // console.log("res",response)
-        //setting state with the poems from the fetch
-        this.setState({ poems: response })
-      })
-    // }
-  }
-
-
   render() {
       console.log(this.state, "Name")
     return (

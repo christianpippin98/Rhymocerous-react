@@ -3,22 +3,19 @@ import { Card, Button } from 'react-bootstrap';
 
 
 
-class ProductDetail extends Component {
+class PoemDetail extends Component {
+
+    currentUser = JSON.parse(sessionStorage.getItem("credentials"))
 
     render() {
-        console.log(this.props.product.name)
         return (
             <>
-                <section className="product">
+                <section className="poem">
                     <Card className="bg-dark text-white">
-                        {/* <Card.Img src={this.props.product.imagePath} alt="Card image" />
-                        <Card.ImgOverlay> */}
-                            <Card.Title>{this.props.product.name}</Card.Title>
-                            <Card.Text>${this.props.product.price}</Card.Text>
-                            <Card.Text>{this.props.product.quantity} left to buy.</Card.Text>
-                            <Card.Img style={{"max-width": "30%"}} variant="top" src={this.props.product.imagePath} />
-                            <Button variant="primary">Add To Order</Button>
-                        {/* </Card.ImgOverlay> */}
+                            <Card.Title>{this.props.poem.title}</Card.Title>
+                            <Card.Text>{this.props.poem.body}</Card.Text>
+                            <Card.Text>{this.props.poem.createdAt}</Card.Text>
+                            <Button variant="primary">Edit</Button>
                     </Card>
                 </section>
             </>
@@ -26,4 +23,4 @@ class ProductDetail extends Component {
     }
 }
 
-export default ProductDetail
+export default PoemDetail
