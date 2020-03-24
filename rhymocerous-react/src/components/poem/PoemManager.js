@@ -1,10 +1,7 @@
 import React, { Component } from "react"
 import PoemList from "./PoemList"
-import NavBar from "../nav/NavBar"
-import Poem from "./PoemCard"
 import APIManager from "../../modules/APIManager"
 
-// import { isAuthenticated } from "../helpers/simpleAuth"
 
 class PoemManager extends Component {
 
@@ -16,17 +13,13 @@ class PoemManager extends Component {
     this.getPoems()
   }
 
+  // get all poems
+  // set state with new data for poems
   getPoems = () => {
-    // get all poems
-    // set state with new data for poems
-    // if (isAuthenticated()) {
       APIManager.getAll()
       .then(response => {
-        // console.log("prop", this.props.poems)
-        console.log("res",response)
         this.setState({ poems: response })
       })
-    // }
   }
 
 

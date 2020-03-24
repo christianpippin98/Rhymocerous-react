@@ -4,7 +4,6 @@ import { Card, Button } from 'react-bootstrap';
 class Poem extends Component {
 
   render() {
-    
     return (
       <>
         <section className="poem">
