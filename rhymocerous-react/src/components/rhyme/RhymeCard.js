@@ -1,22 +1,44 @@
 import React, { Component } from "react"
 import { Card } from 'react-bootstrap';
+import ThesaurusCard from "./ThesaurusCard"
+import ThesaurusAPIManager from "./../../modules/ThesaurusAPIManager"
 
 class RhymeCard extends Component {
 
-  render() {
-    return (
-      <>
-        <section className="rhyme">
-          <Card style={{ width: '15rem' }}>
-            <Card.Body>
-              <Card.Title onClick={() => { this.props.history.push(`/rhymes/${this.props.rhyme.id}`) }}>{this.props.rhyme.word}</Card.Title>
-              <Card.Text>Syllable Count: {this.props.rhyme.numSyllables}</Card.Text>
-            </Card.Body>
-          </Card>
-        </section>
-      </>
-    )
-  }
+    state = {
+        cardToRender: RhymeCard,
+        thesaurus: []
+    }
+
+    renderThesaurus = (word) => {
+        ThesaurusAPIManager.getInfo(word)
+            .then((result) => {
+                this.setState({
+                    thesaurus: result
+                })
+                this.setState({
+                    cardToRender: ThesaurusCard
+                })
+            })
+    }
+
+    render() {
+        return (
+            <>
+                <section className="rhyme">
+                    {this.state.thesaurus ?
+                        <><Card style={{ width: '20rem' }}>
+                            <Card.Body onClick={() => this.renderThesaurus(this.props.rhyme.word)}>
+                                <Card.Title>{this.props.rhyme.word}</Card.Title>
+                                <Card.Text>Syllable Count: {this.props.rhyme.numSyllables}</Card.Text>
+                            </Card.Body>
+                        </Card></> : <><ThesaurusCard thesaurus={this.state.thesaurus} /></>
+                    }
+
+                </section>
+            </>
+        )
+    }
 }
 
 export default RhymeCard

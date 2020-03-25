@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Poem from "./PoemCard"
 import "./PoemList.css"
 import APIManager from "./../../modules/APIManager"
+import { Form } from 'react-bootstrap';
 
 class PoemList extends Component {
 
@@ -27,6 +28,8 @@ class PoemList extends Component {
     return (
       <>
         <article className="poemList">
+        <Form>
+        <Form.Label>Poem List</Form.Label>
           {
             this.props.poems.map(poem =>
               <Poem
@@ -37,6 +40,7 @@ class PoemList extends Component {
               />)
 
           }
+        </Form>
         </article>
       </>
     )

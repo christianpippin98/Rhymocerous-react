@@ -4,6 +4,7 @@ import { Form, Card } from 'react-bootstrap';
 import RhymeManager from '../rhyme/RhymeManager'
 
 class RhymeSearch extends Component {
+
     state = {
         searchString: "",
         rhymes: []
@@ -12,7 +13,6 @@ class RhymeSearch extends Component {
     handleSearch = () => {
         RhymeAPIManager.getRhymes(this.state.searchString)
         .then((result)=>{
-            console.log(result)
             this.setState({
                 rhymes: result
             })
@@ -23,7 +23,6 @@ class RhymeSearch extends Component {
         let stateToChange = {}
         stateToChange[evt.target.id] = evt.target.value
         this.setState(stateToChange)
-        console.log(this.state.searchString)
         this.handleSearch(stateToChange)
     };
 
@@ -39,7 +38,7 @@ class RhymeSearch extends Component {
                 <Form>
                     <Form.Group>
                         <Form.Label>Rhyme Search</Form.Label>
-                        <Form.Control type="text" placeholder="Rhyme Search" id="searchString" name="searchString" onChange={this.onSearch} />
+                        <Form.Control type="text" placeholder="Rhyme Search" id="searchString" name="searchString" onChange={this.onSearch} style={{ width: '20rem' }} />
                         <Form.Text className="text-muted">
                             Search for words to rhyme.
                         </Form.Text>

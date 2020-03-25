@@ -3,6 +3,7 @@ import { Route } from "react-router-dom"
 import NavBar from "./nav/NavBar"
 import ApplicationViews from "./ApplicationViews"
 import RhymeSearch from "./rhyme/RhymeSearch"
+import { Col, Row } from "react-bootstrap"
 
 class RhymocerousBuilder extends Component {
 
@@ -18,12 +19,11 @@ class RhymocerousBuilder extends Component {
                 <Route render={props => (
                     <NavBar {...props} />
                 )} />
-
-
-                <RhymeSearch />
-
-
-                <ApplicationViews />
+                <Row>
+                <Col><RhymeSearch /></Col>
+                <Col sticky="top"><ApplicationViews /></Col>
+                </Row>
+                
             </React.Fragment>
         )
     }
