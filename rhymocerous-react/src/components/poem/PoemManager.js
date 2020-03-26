@@ -22,16 +22,27 @@ class PoemManager extends Component {
       })
   }
 
+  delete = (id) => {
+    APIManager.delete(id)
+      .then(() => {
+        APIManager.getAll("poems")
+          .then((newPoems) => {
+            this.setState({
+              poems: newPoems
+            })
+          })
+          .then(() => APIManager.getAll("poems"));
+      })
+  }
+
 
 
   render() {
-      console.log(this.props.filteredPoems, "filterPoems")
-      console.log(this.state.poems, "poems")
     return (
             
       <>
         <main className="explorer">
-          <PoemList poems={this.state.poems} {...this.props}/>   
+          <PoemList poems={this.state.poems} delete={this.delete} {...this.props}/>   
         </main>
       </>
     )

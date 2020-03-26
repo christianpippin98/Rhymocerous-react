@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import RhymeAPIManager from './../../modules/RhymeAPIManager'
-import { Form, Card } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import RhymeManager from '../rhyme/RhymeManager'
 
 class RhymeSearch extends Component {
+
     state = {
         searchString: "",
         rhymes: []
@@ -12,7 +13,6 @@ class RhymeSearch extends Component {
     handleSearch = () => {
         RhymeAPIManager.getRhymes(this.state.searchString)
         .then((result)=>{
-            console.log(result)
             this.setState({
                 rhymes: result
             })
@@ -22,16 +22,15 @@ class RhymeSearch extends Component {
     onSearch = (evt) => {
         let stateToChange = {}
         stateToChange[evt.target.id] = evt.target.value
-        this.setState(stateToChange)
-        console.log(this.state.searchString)
-        this.handleSearch(stateToChange)
+        this.setState(stateToChange, this.handleSearch)
+        // this.handleSearch(stateToChange)
     };
 
-    handleInputChange = (evt) => {
-        let stateToChange = {}
-        stateToChange[evt.target.id] = evt.target.value
-        this.setState(stateToChange)
-    }
+    // handleInputChange = (evt) => {
+    //     let stateToChange = {}
+    //     stateToChange[evt.target.id] = evt.target.value
+    //     this.setState(stateToChange)
+    // }
 
     render() {
         return (
@@ -39,14 +38,14 @@ class RhymeSearch extends Component {
                 <Form>
                     <Form.Group>
                         <Form.Label>Rhyme Search</Form.Label>
-                        <Form.Control type="text" placeholder="Rhyme Search" id="searchString" name="searchString" onChange={this.onSearch} />
+                        <Form.Control type="text" placeholder="Rhyme Search" id="searchString" name="searchString" style={{ width: '20rem' }} onChange={this.onSearch}/>
                         <Form.Text className="text-muted">
                             Search for words to rhyme.
                         </Form.Text>
+                        {/* <Button variant="secondary" type="submit" id="rhymeSearch">Submit</Button> */}
                     </Form.Group>
                     {this.state.rhymes ?
-                        <><RhymeManager rhymes={this.state.rhymes} /></> : <><Card className="explorer">
-                        <h3>Loading</h3></Card></>
+                        <><RhymeManager rhymes={this.state.rhymes} /></> : <></>
                     }
                 </Form>
             </div>

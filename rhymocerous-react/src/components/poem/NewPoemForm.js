@@ -32,6 +32,7 @@ class NewPoemForm extends Component {
             <>
                 <Form>
                     <Form.Group>
+                        <Form.Label>Write New Poem</Form.Label>
                         <Form.Control type="text" onChange={this.handleInputChange} name="title" id="title" placeholder="Title" required />
                     </Form.Group>
                     <InputGroup>
