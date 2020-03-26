@@ -4,42 +4,72 @@ import { withRouter } from "react-router-dom"
 import PoemManager from "./poem/PoemManager"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import LandingPage from "./auth/LandingPage"
 import PoemDetailView from "./poem/PoemDetailView"
 import NewPoemForm from "./poem/NewPoemForm"
 import EditPoemForm from "./poem/EditPoemForm"
 
 class ApplicationViews extends Component {
-  
 
 
-  
+  isAuthenticated = () => sessionStorage.getItem("rhymocerous_token") !== null
+
   render() {
-    console.log(this.state, "AppView")
     return (
       <React.Fragment>
+        <Route exact path="/" render={props => {
+          if (this.isAuthenticated()) {
+            return <Redirect to="/poems" />
+          } else {
+            return <LandingPage setUser={this.props.setUser} {...props} />
+          }
+        }}
+        />
         <Route exact path="/poems" render={props => {
-          return <PoemManager {...props} completedSearch={this.props.completedSearch} filteredPoems={this.props.filteredPoems}/>
+          if (this.isAuthenticated()) {
+            return <PoemManager {...props} />
+          } else {
+            return <LandingPage setUser={this.props.setUser} {...props} />
+          }
         }}
         />
         <Route exact path="/poems/:poemId(\d+)" render={props => {
-          return <PoemDetailView {...props} />
+          if (this.isAuthenticated()) {
+            return <PoemDetailView {...props} />
+          } else {
+            return <LandingPage setUser={this.props.setUser} {...props} />
+          }
         }}
         />
-        <Route path="/poems/new" render={(props) => {
-          return <NewPoemForm {...props} />
+        <Route exact path="/poems/new" render={(props) => {
+          if (this.isAuthenticated()) {
+            return <NewPoemForm {...props} />
+          } else {
+            return <LandingPage setUser={this.props.setUser} {...props} />
+          }
         }} />
-        <Route path="/poems/edit/:poemId(\d+)" render={(props) => {
-          return <EditPoemForm {...props} />
+        <Route exact path="/poems/edit/:poemId(\d+)" render={(props) => {
+          if (this.isAuthenticated()) {
+            return <EditPoemForm {...props} />
+          } else {
+            return <LandingPage setUser={this.props.setUser} {...props} />
+          }
         }} />
-        <Route
-          path="/register" render={props => {
-            return <Register {...props} />
-          }}
+        <Route exact path="/register" render={props => {
+          if (this.isAuthenticated()) {
+            return <Redirect to="/poems" />
+          } else {
+            return <Register setUser={this.props.setUser} {...props} />
+          }
+        }}
         />
-        <Route
-          path="/login" render={props => {
-            return <Login {...props} />
-          }}
+        <Route exact path="/login" render={props => {
+          if (this.isAuthenticated()) {
+            return <Redirect to="/poems" />
+          } else {
+            return <Login setUser={this.props.setUser} {...props} />
+          }
+        }}
         />
       </React.Fragment>
     )

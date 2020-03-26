@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Card } from 'react-bootstrap';
+import { Popover } from 'react-bootstrap';
 
 class ThesaurusCard extends Component {
 
@@ -8,12 +8,12 @@ class ThesaurusCard extends Component {
       return (
         <>
           <section className="thesaurus">
-            <Card style={{ width: '20rem' }}>
-              <Card.Body>
-                <Card.Title>{this.props.thesaurus.meta.id}</Card.Title>
-                <Card.Text>Definition: {this.props.thesaurus.shortdef}</Card.Text>
-              </Card.Body>
-            </Card>
+            <Popover id={this.props.thesaurus.meta.id}>
+                <Popover.Title as="h3">{this.props.thesaurus.meta.id}</Popover.Title>
+                <Popover.Content>
+                    Definition: {this.props.thesaurus.shortdef}
+                </Popover.Content>
+            </Popover>
           </section>
         </>
       )

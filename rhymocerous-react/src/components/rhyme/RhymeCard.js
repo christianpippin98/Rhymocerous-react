@@ -1,12 +1,11 @@
 import React, { Component } from "react"
-import { Card } from 'react-bootstrap';
+import { Card, OverlayTrigger, Button } from 'react-bootstrap';
 import ThesaurusCard from "./ThesaurusCard"
 import ThesaurusAPIManager from "./../../modules/ThesaurusAPIManager"
 
 class RhymeCard extends Component {
 
     state = {
-        cardToRender: RhymeCard,
         thesaurus: []
     }
 
@@ -16,9 +15,6 @@ class RhymeCard extends Component {
                 this.setState({
                     thesaurus: result
                 })
-                this.setState({
-                    cardToRender: ThesaurusCard
-                })
             })
     }
 
@@ -26,15 +22,16 @@ class RhymeCard extends Component {
         return (
             <>
                 <section className="rhyme">
-                    {this.state.thesaurus ?
-                        <><Card style={{ width: '20rem' }}>
-                            <Card.Body onClick={() => this.renderThesaurus(this.props.rhyme.word)}>
+                    <>
+                        <Card style={{ width: '20rem' }}>
+                            <Card.Body>
                                 <Card.Title>{this.props.rhyme.word}</Card.Title>
-                                <Card.Text>Syllable Count: {this.props.rhyme.numSyllables}</Card.Text>
+                                <OverlayTrigger trigger="click" key={this.props.rhyme.word} placement={'right'} overlay={ThesaurusCard}>
+                                    <Button variant="secondary" onClick={() => this.renderThesaurus(this.props.rhyme.word)}>{this.props.rhyme.word} thesaurus info</Button>
+                                </OverlayTrigger>
                             </Card.Body>
-                        </Card></> : <><ThesaurusCard thesaurus={this.state.thesaurus} /></>
-                    }
-
+                        </Card>
+                    </>
                 </section>
             </>
         )

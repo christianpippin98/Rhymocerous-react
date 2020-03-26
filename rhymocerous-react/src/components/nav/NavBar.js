@@ -1,36 +1,42 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
+import { logout } from "./../helpers/simpleAuth"
 
 
 
 
 class NavBar extends Component {
 
-  state = {
-      poems : ""
-  }
+  isAuthenticated = () => sessionStorage.getItem("rhymocerous_token") !== null
 
   render() {
-      console.log(this.state, "Name")
-    return (
-      <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
-        <ul className="nav nav-pills nav-fill">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Rhymocerous</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/poems">Poems</Link>
-          </li>
-          <li className="nav-item">
-            <button type="button"
-              className="nav-item"
-              onClick={() => { this.props.history.push("/poems/new") }}>
-              Write A Poem
-            </button>
-          </li>
-        </ul>
-      </nav>
-    )
+    if (this.isAuthenticated()) {
+      return (
+        <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
+          <ul className="nav nav-pills nav-fill">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">Rhymocerous</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/poems/new">Write a Poem</Link>
+            </li>
+            <li className="nav-item" onClick={logout}>
+              <Link className="nav-link" to="/">Logout</Link>
+            </li>
+          </ul>
+        </nav>
+      )
+    } else {
+      return (
+        <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
+          <ul className="nav nav-pills nav-fill">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">Rhymocerous</Link>
+            </li>
+          </ul>
+        </nav>
+      )
+    }
 
   }
 }
