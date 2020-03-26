@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import RhymeList from "./RhymeList"
-import APIManager from "../../modules/APIManager"
 
 
 class RhymeManager extends Component {

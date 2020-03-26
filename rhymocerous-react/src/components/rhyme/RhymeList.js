@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import RhymeCard from "./RhymeCard"
+import './RhymeList.css'
+
 
 class RhymeList extends Component {
 
@@ -11,17 +13,17 @@ class RhymeList extends Component {
     render() {
         return (
             <>
-                <article className="rhymeList">
+                <div className="rhymeList">
                     {
                         this.props.rhymes.map(rhyme =>
                             <RhymeCard
-                                key={rhyme.word}
+                                key={`${rhyme.word}${rhyme.score}`}
                                 rhyme={rhyme}
                                 delete={this.delete}
                                 {...this.props}
                             />)
                     }
-                </article>
+                </div>
             </>
         )
     }

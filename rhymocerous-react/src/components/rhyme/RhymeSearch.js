@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RhymeAPIManager from './../../modules/RhymeAPIManager'
-import { Form, Card, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import RhymeManager from '../rhyme/RhymeManager'
 
 class RhymeSearch extends Component {

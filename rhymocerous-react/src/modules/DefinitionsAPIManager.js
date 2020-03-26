@@ -1,8 +1,8 @@
-const remoteURL = "https://api.datamuse.com/words?rel_syn="
+const remoteURL = "https://api.datamuse.com/words?sp="
 
 export default {
     getInfo(word) {
-        return fetch(`${remoteURL}${word}`, {
+        return fetch(`${remoteURL}${word}&md=d`, {
             "method": "GET",
             "headers": {
                 "Content-Type": "application/json"

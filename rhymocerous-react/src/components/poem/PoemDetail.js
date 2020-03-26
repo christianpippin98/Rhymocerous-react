@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 
 
@@ -16,7 +16,6 @@ class PoemDetail extends Component {
                             <Card.Title>{this.props.poem.title}</Card.Title>
                             <Card.Text>{this.props.poem.body}</Card.Text>
                             <Card.Text>{this.props.poem.createdAt}</Card.Text>
-                            
                         </Card.Body>
                     </Card>
                 </section>

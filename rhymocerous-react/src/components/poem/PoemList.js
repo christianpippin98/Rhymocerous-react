@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import Poem from "./PoemCard"
 import "./PoemList.css"
-import APIManager from "./../../modules/APIManager"
 import { Form } from 'react-bootstrap';
 
 class PoemList extends Component {
@@ -11,23 +10,12 @@ class PoemList extends Component {
     poems: []
   }
 
-  delete = (id) => {
-    APIManager.delete(id)
-      .then(() => {
-        APIManager.getAll("poems")
-          .then((newPoems) => {
-            this.setState({
-              poems: newPoems
-            })
-          })
-      })
-      .then(() => APIManager.getAll("poems"));
-  }
+  
 
   render() {
     return (
       <>
-        <article className="poemList">
+        <div className="poemList">
         <Form>
         <Form.Label>Poem List</Form.Label>
           {
@@ -35,13 +23,13 @@ class PoemList extends Component {
               <Poem
                 key={poem.id}
                 poem={poem}
-                delete={this.delete}
+                delete={this.props.delete}
                 {...this.props}
               />)
 
           }
         </Form>
-        </article>
+        </div>
       </>
     )
   }
