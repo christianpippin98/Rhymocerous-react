@@ -12,6 +12,16 @@ export default {
             }
         }).then(response => response.json())
     },
+    getUser(id) {
+      return fetch(`${remoteURL}/users/${id}`, {
+        "method": "GET",
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Token ${sessionStorage.getItem("rhymocerous_token")}`
+        }
+      }).then(response => response.json())
+    },
     get(id) {
         return fetch(`${remoteURL}/poems/${id}`, {
             "method": "GET",
