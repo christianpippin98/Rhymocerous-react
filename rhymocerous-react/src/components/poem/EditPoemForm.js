@@ -13,14 +13,14 @@ class EditPoemForm extends Component {
     componentDidMount() {
         APIManager.get(this.props.match.params.poemId)
             .then(poem => {
-                console.log(poem)
+                console.log(poem, "poem object")
                 this.setState({
                     title: poem.title,
                     body: poem.body,
                     loadingStatus: false
                 });
-                console.log(this.state.title)
-                console.log(this.state.body)
+                console.log(this.state.title, "poem title")
+                console.log(this.state.body, "poem body")
             });
     }
 
@@ -39,7 +39,7 @@ class EditPoemForm extends Component {
             title: this.state.title,
             body: this.state.body
           };
-        console.log(this.props.match.params.poemId)
+        console.log(this.props.match.params.poemId, "poem id")
         APIManager.update(editedPost, this.props.match.params.poemId)
             .then(response => {
                 this.setState({ poem: response })

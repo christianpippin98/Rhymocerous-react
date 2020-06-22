@@ -12,10 +12,10 @@ class RhymeCard extends Component {
     }
 
     renderThesaurus = (word) => {
-        console.log(word)
+        console.log(word, "word")
         ThesaurusAPIManager.getInfo(word)
             .then((result) => {
-                console.log(result, result)
+                console.log(result, "result")
                 this.setState({
                     thesaurus: result
                 })
@@ -23,10 +23,10 @@ class RhymeCard extends Component {
     }
 
     renderDefinitions = (word) => {
-        console.log(word)
+        console.log(word, "word")
         DefinitionsAPIManager.getInfo(word)
             .then((result) => {
-                console.log(result, result)
+                console.log(result, "result")
                 this.setState({
                     definitions: result[0].defs
                 })
@@ -43,25 +43,41 @@ class RhymeCard extends Component {
                                 <Card.Title>{this.props.rhyme.word}</Card.Title>
                                 <OverlayTrigger target="" trigger="click" key={`${this.props.rhyme.word}-syn`} placement='right' overlay={<Popover id="popover-positioned-right" placement="right">
                                     <Popover.Title as="h3">{this.props.rhyme.word}</Popover.Title>
-                                    <Popover.Content>
-                                        <ol>
-                                            {this.state.thesaurus.map((word) => {
-                                                return <li key={word.word}>{word.word}</li>
-                                            })}
-                                        </ol>
-                                    </Popover.Content>
+                                    {this.state.thesaurus ?
+                                        <>
+                                            <Popover.Content>
+                                                <ol>
+                                                    {this.state.thesaurus.map((word) => {
+                                                        return <li key={word.word}>{word.word}</li>
+                                                    })}
+                                                </ol>
+                                            </Popover.Content>
+                                        </> : <>
+                                            <Popover.Content>
+                                                <p>No Synonyms Available</p>
+                                            </Popover.Content>
+                                        </>
+                                    }
                                 </Popover>}>
                                     <Button variant="secondary" onClick={() => this.renderThesaurus(this.props.rhyme.word)}>Synonyms</Button>
                                 </OverlayTrigger>
                                 <OverlayTrigger target="" trigger="click" key={`${this.props.rhyme.word}-def`} placement='right' overlay={<Popover id="popover-positioned-right" placement="right">
                                     <Popover.Title as="h3">{this.props.rhyme.word}</Popover.Title>
-                                    <Popover.Content>
-                                        <ol>
-                                            {this.state.definitions.map((def) => {
-                                                return <li key={def}>{def}</li>
-                                            })}
-                                        </ol>
-                                    </Popover.Content>
+                                    {this.state.definitions ?
+                                        <>
+                                            <Popover.Content>
+                                                <ol>
+                                                    {this.state.definitions.map((def) => {
+                                                        return <li key={def}>{def}</li>
+                                                    })}
+                                                </ol>
+                                            </Popover.Content>
+                                        </> : <>
+                                            <Popover.Content>
+                                                <p>No Definitions Available</p>
+                                            </Popover.Content>
+                                        </>
+                                    }
                                 </Popover>}>
                                     <Button variant="secondary" onClick={() => this.renderDefinitions(this.props.rhyme.word)}>Definitions</Button>
                                 </OverlayTrigger>
