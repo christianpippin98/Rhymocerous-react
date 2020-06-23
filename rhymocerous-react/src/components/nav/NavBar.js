@@ -20,13 +20,16 @@ class NavBar extends Component {
   isAuthenticated = () => sessionStorage.getItem("rhymocerous_token") !== null
 
   getUser = () => {
-      APIManager.getUser(`${this.props.match.params.userId}`)
+    APIManager.getUser(2)
       .then(response => {
         this.setState({ user: response })
       })
   }
 
+
+
   render() {
+    console.log(this.state.user.first_name)
     if (this.isAuthenticated()) {
       return (
         <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
@@ -37,7 +40,7 @@ class NavBar extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/poems/new">Write a Poem</Link>
             </li>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown title={`${this.state.user.first_name} ${this.state.user.last_name}`} id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Friends</NavDropdown.Item>
               <NavDropdown.Divider />
